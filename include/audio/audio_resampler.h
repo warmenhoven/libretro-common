@@ -229,6 +229,12 @@ const char *audio_resampler_driver_find_ident(int index);
 bool retro_resampler_realloc(void **re, const retro_resampler_t **backend,
       const char *ident, enum resampler_quality quality, double bw_ratio);
 
+/* Same lifetime/lookup semantics as realloc. HQ affects only sinc at nominal
+ * ratios >= 2; other backends ignore it. Call only with processing stopped. */
+bool retro_resampler_realloc_hq(void **re, const retro_resampler_t **backend,
+      const char *ident, enum resampler_quality quality, double bw_ratio,
+      bool hq_oversampling);
+
 RETRO_END_DECLS
 
 #endif
